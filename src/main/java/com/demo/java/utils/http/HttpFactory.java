@@ -20,6 +20,9 @@ import java.util.Map;
 
 import static com.demo.java.commons.Config.CHARSET;
 
+/**
+ * HTTP请求工具类
+ */
 public class HttpFactory {
 
     static int socketTimeout = 2000;
