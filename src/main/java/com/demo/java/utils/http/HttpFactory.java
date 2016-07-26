@@ -1,4 +1,4 @@
-package com.demo.java.http;
+package com.demo.java.utils.http;
 
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
