@@ -3,6 +3,9 @@ package com.demo.java.utils.crypto;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * MD5等加密
+ */
 public class DigestUtils {
 
     public final class Algorithm {

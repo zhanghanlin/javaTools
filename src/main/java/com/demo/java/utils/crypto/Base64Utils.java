@@ -3,6 +3,9 @@ package com.demo.java.utils.crypto;
 import com.demo.java.utils.string.BytesUtils;
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * Base64加密工具类
+ */
 public class Base64Utils {
 
     public static String encodeBase64(byte[] simple) {
