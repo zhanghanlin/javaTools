@@ -1,4 +1,4 @@
-package com.demo.java.utils.crypto;
+package com.demo.java.utils.string;
 
 import java.io.UnsupportedEncodingException;
 

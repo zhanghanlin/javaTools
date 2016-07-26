@@ -1,5 +1,7 @@
 package com.demo.java.utils.crypto;
 
+import com.demo.java.utils.string.HexUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
