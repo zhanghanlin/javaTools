@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Hashtable;
 
+import static com.demo.java.commons.Config.CHARSET;
+
 /**
  * 使用Google ZXing工具生成二维码
  */
@@ -19,7 +21,6 @@ public class ZXingUtil {
 
     static int width = 140;
     static int height = 140;
-
 
     /**
      * 生成二维码图片到文件
@@ -97,7 +98,7 @@ public class ZXingUtil {
         // 设置QR二维码的纠错级别——这里选择最高H级别
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
         // 设置编码方式
-        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        hints.put(EncodeHintType.CHARACTER_SET, CHARSET);
         // 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数
         return new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
     }
