@@ -50,6 +50,10 @@ public class ZXingUtil {
      */
     public static void encode(String content, int width, int height, String format, String imageName, String src) throws IOException, WriterException {
         BitMatrix bitMatrix = getBitMatrix(content, width, height);
+        File path = new File(src);
+        if (!path.exists()) {
+            path.mkdirs();
+        }
         File file = new File(src + "/" + imageName + "." + format);
         MatrixToImageWriter.write2File(bitMatrix, format, file);
     }
