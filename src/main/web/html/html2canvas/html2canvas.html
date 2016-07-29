@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>html2canvas</title>
+    <link rel="stylesheet" href="../../static/css/reset.css"/>
+    <link rel="stylesheet" href="../../static/css/base.css"/>
+    <link rel="stylesheet" href="../../static/css/detail.css"/>
+</head>
+<body>
+<section class="mt0">
+    <div class="color3 fs15">
+        html2canvas
+    </div>
+    <div>
+        <div class="">
+            html2canvas html2canvas html2canvas
+        </div>
+        <div>
+            <hr/>
+        </div>
+        <div class="descript">
+            html2canvas  html2canvas html2canvas html2canvas html2canvas
+        </div>
+    </div>
+</section>
+<section>
+    <div class="rowDiv">
+        <div class="pr12">
+            <p><span class="money">15.8</span>万</p>
+        </div>
+        <div class="split content">
+            <p class=""><span>1111-11</span> <span>1.1万公里</span></p>
+            <p>html2canvas</p>
+        </div>
+        <div class="rightFlex">
+            <p>北京</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="tags">
+        <div>html2canvas</div>
+        <div>html2canvas</div>
+        <div>html2canvas</div>
+        <div>html2canvas</div>
+        <div id="save">生成图片</div>
+    </div>
+</section>
+
+<section>
+    <div class="rowDiv user">
+        <div class="call left"><img src="../../static/img/call.png"/></div>
+        <div class="name">鬼先生</div>
+        <div class="centerDiv userPhone">
+            <p>130XXXXXXXX</p>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="rowDiv user">
+        <div class="call left"><img src="../../static/img/location.png"/></div>
+        <div class="centerDiv">
+            <p>html2canvas html2canvas html2canvas html2canvas html2canvas</p>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="two-code">
+        <img src="../../static/img/code.png"/>
+        <div class="codeTxt">关注公众号，html2canvas更便捷</div>
+    </div>
+</section>
+<script src="../../static/js/jquery-3.0.0.min.js"></script>
+<script src="../../static/js/fontSize.js"></script>
+<script src="../../static/js/html2canvas.js"></script>
+<script>
+    var w = document.body.scrollWidth;
+    var h = document.body.scrollHeight;
+
+    $("#save").on("click", function () {
+        html2img($('body'), getCanvas());
+    });
+
+    /**
+     *  创建画布
+     */
+    var getCanvas = function () {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext("2d");
+        var r = getPixelRatio(context);
+        canvas.width = w * r;
+        canvas.height = h * r;
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        //然后将画布缩放，将图像放大两倍画到画布上
+        context.scale(r, r);
+        return canvas;
+    }
+
+    /**
+     * 截屏
+     */
+    var html2img = function (dom, canvas) {
+        html2canvas(dom, {
+            background: '#fff',
+            canvas: canvas,
+            onrendered: function (canvas) {
+                var dataUrl = canvas.toDataURL("image/jpeg");
+                var newImg = document.createElement("img");
+                $(newImg).width(w);
+                newImg.src = dataUrl;
+                dom.html(newImg);
+            }
+        });
+    }
+
+    /**
+     * 得到devicePixelRatio和backingStorePixelRatio的比例
+     * @param context
+     * @returns {number}
+     */
+    var getPixelRatio = function (context) {
+        var backingStore = context.backingStorePixelRatio ||
+                context.webkitBackingStorePixelRatio ||
+                context.mozBackingStorePixelRatio ||
+                context.msBackingStorePixelRatio ||
+                context.oBackingStorePixelRatio ||
+                context.backingStorePixelRatio || 1;
+        return (window.devicePixelRatio || 1) / backingStore;
+    };
+</script>
+</body>
+</html>
