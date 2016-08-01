@@ -18,7 +18,7 @@ import static com.demo.java.commons.Config.CHARSET;
  */
 public class VmUtils {
 
-    public static boolean vm2Html(VelocityContext context, String name) {
+    public static boolean vm2Html(VelocityContext context) {
         String path = "/data/web";
         String vmPath = "/data/web/vm";
         try {
@@ -33,9 +33,9 @@ public class VmUtils {
             ve.init(p);
             Velocity.init();
 
-            Template template = ve.getTemplate("brand.vm", CHARSET);
+            Template template = ve.getTemplate("test.vm", CHARSET);
             createdPath(path);
-            FileOutputStream fos = new FileOutputStream(path + "/" + name + ".html");
+            FileOutputStream fos = new FileOutputStream(path + "/test.html");
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos, CHARSET));
             template.merge(context, writer);
 
