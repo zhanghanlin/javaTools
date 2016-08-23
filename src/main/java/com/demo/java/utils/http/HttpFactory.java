@@ -42,13 +42,19 @@ public class HttpFactory {
         return http;
     }
 
+    public static String doPost(String url, List<NameValuePair> param) throws IOException {
+        return doPost(url, param, null, socketTimeout, timeout, requestTimeout);
+    }
+
     public static String doPost(String url, List<NameValuePair> param, List<NameValuePair> header,
                                 int socketTimeout, int timeout, int requestTimeout) throws IOException {
         String result = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
         httpPost = (HttpPost) setHeader(httpPost, header);
-        httpPost.setEntity(new UrlEncodedFormEntity(param, CHARSET));
+        if (param != null && !param.isEmpty()) {
+            httpPost.setEntity(new UrlEncodedFormEntity(param, CHARSET));
+        }
         httpPost.setConfig(requestConfig(socketTimeout, timeout, requestTimeout));
         CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
         try {
