@@ -25,12 +25,9 @@ public class FixedThreadPool {
      * @param task 任务编号
      */
     private void runFixedThreadPool(final String task) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("run task :" + task);
-            }
-        });
+        executor.execute(() ->
+                System.out.println("run task :" + task)
+        );
     }
 
     /**
@@ -39,19 +36,16 @@ public class FixedThreadPool {
      * @param task 任务编号
      */
     private void run2FixedThreadPool(final String task) {
-        FutureTask<String> future = new FutureTask<>(new Callable() {
-            @Override
-            public Object call() throws Exception {
-                try {
-                    //模拟执行时间为随机值
-                    Thread.sleep(new Random().nextInt(100));
-                    System.out.println("run task :" + task);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //真正的任务在这里执行，这里的返回值类型为String，可以为任意类型
-                return String.valueOf(new Random().nextInt(6000));
+        FutureTask<String> future = new FutureTask<>(() -> {
+            try {
+                //模拟执行时间为随机值
+                Thread.sleep(new Random().nextInt(100));
+                System.out.println("run task :" + task);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            //真正的任务在这里执行，这里的返回值类型为String，可以为任意类型
+            return String.valueOf(new Random().nextInt(6000));
         });
         executor.execute(future);
         try {
