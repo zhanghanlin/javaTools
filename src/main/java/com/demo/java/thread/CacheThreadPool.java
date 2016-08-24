@@ -3,17 +3,14 @@ package com.demo.java.thread;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.demo.java.commons.Config.maxThreadNum;
+
 /**
  * 线程池实例
  */
 public class CacheThreadPool {
     private CacheThreadPool() {
     }
-
-    /**
-     * CPU核数
-     */
-    static final int maxThreadNum = Runtime.getRuntime().availableProcessors() + 1;
 
     static ExecutorService exec = Executors.newFixedThreadPool(maxThreadNum);
 
