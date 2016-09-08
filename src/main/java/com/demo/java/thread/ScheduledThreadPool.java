@@ -3,19 +3,19 @@ package com.demo.java.thread;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.demo.java.commons.Config.maxThreadNum;
+
 /**
- * CacheThreadPool线程池实例
+ * ScheduledThreadPool线程池
  */
-public class CacheThreadPool extends ThreadPool {
-    private CacheThreadPool() {
-    }
+public class ScheduledThreadPool extends ThreadPool {
 
-    static ExecutorService executor = Executors.newCachedThreadPool();
+    static ExecutorService executor = Executors.newScheduledThreadPool(maxThreadNum);
 
-    static CacheThreadPool cacheThreadPool = new CacheThreadPool();
+    private static ScheduledThreadPool scheduledThreadPool = new ScheduledThreadPool();
 
-    static CacheThreadPool getInstance() {
-        return cacheThreadPool;
+    public static ScheduledThreadPool getInstance() {
+        return scheduledThreadPool;
     }
 
     /**
@@ -28,7 +28,7 @@ public class CacheThreadPool extends ThreadPool {
     }
 
     public static void main(String[] args) {
-        CacheThreadPool pool = CacheThreadPool.getInstance();
+        ScheduledThreadPool pool = ScheduledThreadPool.getInstance();
         String task = "";//模拟任务
         for (int i = 0; i < 15; i++) {
             pool.runThreadPool(i + task);

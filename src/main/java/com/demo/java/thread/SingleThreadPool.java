@@ -4,18 +4,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * CacheThreadPool线程池实例
+ * SingleThreadPool线程池实例
  */
-public class CacheThreadPool extends ThreadPool {
-    private CacheThreadPool() {
+public class SingleThreadPool extends ThreadPool {
+
+    private SingleThreadPool() {
     }
 
-    static ExecutorService executor = Executors.newCachedThreadPool();
+    static ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    static CacheThreadPool cacheThreadPool = new CacheThreadPool();
+    static SingleThreadPool singleThreadPool = new SingleThreadPool();
 
-    static CacheThreadPool getInstance() {
-        return cacheThreadPool;
+    static SingleThreadPool getInstance() {
+        return singleThreadPool;
     }
 
     /**
@@ -27,8 +28,9 @@ public class CacheThreadPool extends ThreadPool {
         executor.execute(() -> run(task));
     }
 
+
     public static void main(String[] args) {
-        CacheThreadPool pool = CacheThreadPool.getInstance();
+        SingleThreadPool pool = SingleThreadPool.getInstance();
         String task = "";//模拟任务
         for (int i = 0; i < 15; i++) {
             pool.runThreadPool(i + task);
