@@ -1,17 +1,19 @@
 package com.demo.java.thread;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.demo.java.commons.Config.maxThreadNum;
 
 /**
  * ScheduledThreadPool线程池
  * 创建corePoolSize大小的线程池
+ * 支持定时及周期性任务执行
  */
 public class ScheduledThreadPool extends ThreadPool {
 
-    static ExecutorService executor = Executors.newScheduledThreadPool(maxThreadNum);
+    static ScheduledExecutorService executor = Executors.newScheduledThreadPool(maxThreadNum);
 
     private static ScheduledThreadPool scheduledThreadPool = new ScheduledThreadPool();
 
@@ -25,7 +27,7 @@ public class ScheduledThreadPool extends ThreadPool {
      * @param task 任务编号
      */
     private void runThreadPool(final String task) {
-        executor.execute(() -> run(task));
+        executor.schedule(() -> run(task), 3, TimeUnit.SECONDS);
     }
 
     public static void main(String[] args) {
