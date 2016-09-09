@@ -5,11 +5,9 @@ import java.util.concurrent.Executors;
 
 /**
  * SingleThreadPool线程池实例
+ * 创建大小为1的固定线程池
  */
 public class SingleThreadPool extends ThreadPool {
-
-    private SingleThreadPool() {
-    }
 
     static ExecutorService executor = Executors.newSingleThreadExecutor();
 

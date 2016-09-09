@@ -5,10 +5,10 @@ import java.util.concurrent.Executors;
 
 /**
  * CacheThreadPool线程池实例
+ * 创建corePoolSize为0，最大线程数为整型的最大数
+ * 线程keepAliveTime为1分钟，缓存任务的队列为SynchronousQueue的线程池
  */
 public class CacheThreadPool extends ThreadPool {
-    private CacheThreadPool() {
-    }
 
     static ExecutorService executor = Executors.newCachedThreadPool();
 

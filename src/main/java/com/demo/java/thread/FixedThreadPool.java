@@ -8,6 +8,7 @@ import static com.demo.java.commons.Config.maxThreadNum;
 
 /**
  * FixedThreadPool线程池
+ * 创建固定大小(nThreads,大小不能超过int的最大值)的线程池
  */
 public class FixedThreadPool extends ThreadPool {
 

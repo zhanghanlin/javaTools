@@ -7,6 +7,7 @@ import static com.demo.java.commons.Config.maxThreadNum;
 
 /**
  * ScheduledThreadPool线程池
+ * 创建corePoolSize大小的线程池
  */
 public class ScheduledThreadPool extends ThreadPool {
 
