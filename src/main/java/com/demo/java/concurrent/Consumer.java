@@ -16,9 +16,8 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         try {
-
             while (true) {
-                System.out.println(name + " 准备消费");
+                System.out.println(name + "准备消费");
                 Product p = storage.pop();
                 System.out.println(name + "已消费:" + p.toString());
                 System.out.println("================");
