@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * 装产品的容器
+ *
+ * @author zhanghanlin
  */
 public class Container<T> {
 

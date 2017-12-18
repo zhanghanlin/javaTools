@@ -1,7 +1,9 @@
 package com.demo.java.concurrent.sync;
 
 /**
+ * 同步示例
  *
+ * @author zhanghanlin
  */
 public class Client {
 

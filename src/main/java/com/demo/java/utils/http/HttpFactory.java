@@ -25,7 +25,7 @@ import static com.demo.java.commons.Config.CHARSET;
 /**
  * HTTP请求工具类
  *
- * @author zhanghanlin6
+ * @author zhanghanlin
  */
 public class HttpFactory {
 

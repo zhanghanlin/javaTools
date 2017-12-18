@@ -3,11 +3,22 @@ package com.demo.java.utils.collection;
 import java.text.Collator;
 import java.util.*;
 
+/**
+ * 排序工具
+ *
+ * @author zhanghanlin
+ */
 public class SortUtils {
 
     enum Order {
-
-        DESC(-1, 1), ASC(1, -1);
+        /**
+         * 倒序
+         */
+        DESC(-1, 1),
+        /**
+         * 正序
+         */
+        ASC(1, -1);
 
         private int one;
         private int two;
@@ -29,15 +40,15 @@ public class SortUtils {
     /**
      * 首字母排序
      *
-     * @param list
-     * @param order
+     * @param list  List
+     * @param order Order
      */
-    public static void sortWords(List list, final Order order) {
-        Collections.sort(list, new Comparator() {
+    public static void sortWords(List<String> list, final Order order) {
+        Collections.sort(list, new Comparator<String>() {
             Comparator comparator = Collator.getInstance(Locale.SIMPLIFIED_CHINESE);
 
             @Override
-            public int compare(Object o1, Object o2) {
+            public int compare(String o1, String o2) {
                 if (comparator.compare(o1, o2) > 0) {
                     return order.getOne();
                 } else if (comparator.compare(o1, o2) < 0) {

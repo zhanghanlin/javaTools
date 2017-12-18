@@ -1,5 +1,10 @@
 package com.demo.java.commons;
 
+/**
+ * 默认公共配置
+ *
+ * @author zhanghanlin
+ */
 public interface Config {
 
     /**
@@ -10,5 +15,5 @@ public interface Config {
     /**
      * CPU核数
      */
-    int maxThreadNum = Runtime.getRuntime().availableProcessors() + 1;
+    int MAX_THREAD_NUM = Runtime.getRuntime().availableProcessors() + 1;
 }

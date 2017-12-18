@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static com.demo.java.commons.Config.maxThreadNum;
+import static com.demo.java.commons.Config.MAX_THREAD_NUM;
 
 /**
  * FixedThreadPool线程池
@@ -12,7 +12,7 @@ import static com.demo.java.commons.Config.maxThreadNum;
  */
 public class FixedThreadPool extends ThreadPool {
 
-    static ExecutorService executor = Executors.newFixedThreadPool(maxThreadNum);
+    static ExecutorService executor = Executors.newFixedThreadPool(MAX_THREAD_NUM);
 
     private static FixedThreadPool fixedThreadPool = new FixedThreadPool();
 

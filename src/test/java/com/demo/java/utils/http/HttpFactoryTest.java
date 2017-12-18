@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * HttpFactory Test Class
  *
- * @author zhanghanlin6
+ * @author zhanghanlin
  */
 public class HttpFactoryTest extends BaseTest {
 

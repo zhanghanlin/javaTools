@@ -11,6 +11,8 @@ import java.util.Enumeration;
 
 /**
  * pfx与keystore证书互转
+ *
+ * @author zhanghanlin
  */
 public class Convert {
     public static final String PKCS12 = "PKCS12";

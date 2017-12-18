@@ -4,7 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static com.demo.java.commons.Config.maxThreadNum;
+import static com.demo.java.commons.Config.MAX_THREAD_NUM;
 
 /**
  * ScheduledThreadPool线程池
@@ -13,7 +13,7 @@ import static com.demo.java.commons.Config.maxThreadNum;
  */
 public class ScheduledThreadPool extends ThreadPool {
 
-    static ScheduledExecutorService executor = Executors.newScheduledThreadPool(maxThreadNum);
+    static ScheduledExecutorService executor = Executors.newScheduledThreadPool(MAX_THREAD_NUM);
 
     private static ScheduledThreadPool scheduledThreadPool = new ScheduledThreadPool();
 

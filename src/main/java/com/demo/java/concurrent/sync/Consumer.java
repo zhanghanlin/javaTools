@@ -2,16 +2,24 @@ package com.demo.java.concurrent.sync;
 
 /**
  * 消费者
+ *
+ * @author zhanghanlin
  */
 public class Consumer implements Runnable {
 
-    // 简单的模拟，这里一个生产容器，设置成final类型的话不允许再次赋值
+    /**
+     * 简单的模拟，这里一个生产容器，设置成final类型的话不允许再次赋值
+     */
     private final Container<Product> container;
 
-    // 生产者监听器
+    /**
+     * 生产者监听器
+     */
     private Object producerMonitor;
 
-    // 消费者监听器
+    /**
+     * 消费者监听器
+     */
     private Object consumerMonitor;
 
     public Consumer(Container<Product> container, Object producerMonitor, Object consumerMonitor) {

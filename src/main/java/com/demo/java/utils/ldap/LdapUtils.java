@@ -14,29 +14,40 @@ import java.util.Properties;
 
 /**
  * Ldap连接AD
+ *
+ * @author zhanghanlin
  */
 public class LdapUtils {
 
-    DirContext dc = null;
-    static String LDAP_URL = "ldap://192.168.1.1"; // LDAP访问地址
-    static String adminName = "test@test.com"; // 注意用户名的写法：domain\User或
-    static String adminPassword = "test"; // 密码
+    private DirContext dc = null;
+    /**
+     * LDAP访问地址
+     */
+    private static String LDAP_URL = "ldap://192.168.1.1";
+    /**
+     * 注意用户名的写法：domain\User或
+     */
+    private static String adminName = "test@test.com";
+    /**
+     * 密码
+     */
+    private static String adminPassword = "test";
 
     /**
      * Ldap连接
-     *
-     * @return LdapContext
      */
     public void init() {
-        Hashtable env = new Hashtable();
+        Hashtable<String, String> env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, LDAP_URL);
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
         env.put(Context.SECURITY_PRINCIPAL, adminName);
         env.put(Context.SECURITY_CREDENTIALS, adminPassword);
         try {
-            dc = new InitialDirContext(env);// 初始化上下文
-            System.out.println("认证成功");// 这里可以改成异常抛出。
+            // 初始化上下文
+            dc = new InitialDirContext(env);
+            // 这里可以改成异常抛出。
+            System.out.println("认证成功");
         } catch (javax.naming.AuthenticationException e) {
             System.out.println("认证失败");
         } catch (Exception e) {
@@ -47,7 +58,7 @@ public class LdapUtils {
     /**
      * 关闭Ldap连接
      */
-    public void close() {
+    private void close() {
         if (dc != null) {
             try {
                 dc.close();
@@ -57,10 +68,16 @@ public class LdapUtils {
         }
     }
 
-    public void search(String name) {
+    /**
+     * 根据账号查询
+     *
+     * @param name name
+     */
+    private void search(String name) {
         Properties env = new Properties();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-        env.put(Context.SECURITY_AUTHENTICATION, "simple");//"none","simple","strong"
+        //"none","simple","strong"
+        env.put(Context.SECURITY_AUTHENTICATION, "simple");
         env.put(Context.SECURITY_PRINCIPAL, adminName);
         env.put(Context.SECURITY_CREDENTIALS, adminPassword);
         env.put(Context.PROVIDER_URL, LDAP_URL);
@@ -69,7 +86,7 @@ public class LdapUtils {
             SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             String filterName = "*";
-            if (name != null && !name.equals("")) {
+            if (name != null && !"".equals(name)) {
                 filterName = name;
             }
             String searchFilter = "(&(objectCategory=person)(objectClass=user)(mail=" + filterName + "))";
@@ -90,7 +107,7 @@ public class LdapUtils {
     /**
      * 主函数用于测试
      *
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         LdapUtils ldap = new LdapUtils();

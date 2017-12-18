@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  * Spring工具类
+ *
+ * @author zhanghanlin
  */
 public class SpringUtils implements ApplicationContextAware {
 
@@ -28,8 +30,9 @@ public class SpringUtils implements ApplicationContextAware {
      * @return
      */
     public static <T> T getBean(String beanName) {
-        if (getApplicationContext() == null)
+        if (getApplicationContext() == null) {
             return null;
+        }
         return (T) getApplicationContext().getBean(beanName);
     }
 }

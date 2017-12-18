@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 /**
  * SingleThreadPool线程池实例
  * 创建大小为1的固定线程池
+ *
+ * @author zhanghanlin
  */
 public class SingleThreadPool extends ThreadPool {
 
@@ -29,7 +31,8 @@ public class SingleThreadPool extends ThreadPool {
 
     public static void main(String[] args) {
         SingleThreadPool pool = SingleThreadPool.getInstance();
-        String task = "";//模拟任务
+        //模拟任务
+        String task = "";
         for (int i = 0; i < 15; i++) {
             pool.runThreadPool(i + task);
         }

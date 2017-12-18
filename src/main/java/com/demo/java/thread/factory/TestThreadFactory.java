@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static com.demo.java.commons.Config.maxThreadNum;
+import static com.demo.java.commons.Config.MAX_THREAD_NUM;
 
 /**
  * 测试线程工厂
@@ -13,9 +13,9 @@ public class TestThreadFactory {
     public static void main(String[] args) {
         //创建线程（并发）池，自动伸缩(自动条件线程池大小)
 //        ExecutorService executor = Executors.newCachedThreadPool(new WorkThreadFactory());
-        ExecutorService executor = Executors.newFixedThreadPool(maxThreadNum, new WorkThreadFactory());
+        ExecutorService executor = Executors.newFixedThreadPool(MAX_THREAD_NUM, new WorkThreadFactory());
 //        ExecutorService executor = Executors.newSingleThreadExecutor(new WorkThreadFactory());
-//        ExecutorService executor = Executors.newScheduledThreadPool(maxThreadNum, new WorkThreadFactory());
+//        ExecutorService executor = Executors.newScheduledThreadPool(MAX_THREAD_NUM, new WorkThreadFactory());
         //同时并发10个工作线程
         for (int i = 0; i < 10; i++) {
             executor.execute(new WorkRunnable(i));
