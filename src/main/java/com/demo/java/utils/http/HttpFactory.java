@@ -12,6 +12,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,45 +24,123 @@ import static com.demo.java.commons.Config.CHARSET;
 
 /**
  * HTTP请求工具类
+ *
+ * @author zhanghanlin6
  */
 public class HttpFactory {
 
-    static int socketTimeout = 2000;
-    static int requestTimeout = 2000;
-    static int timeout = 2000;
+    private final static Logger logger = LoggerFactory.getLogger(HttpFactory.class);
 
-    static RequestConfig requestConfig(int socketTimeout, int timeout, int requestTimeout) {
+    private final static int SOCKET_TIMEOUT = 5000;
+    private final static int REQUEST_TIMEOUT = 5000;
+    private final static int TIMEOUT = 5000;
+
+    /**
+     * 构造公共请求配置
+     *
+     * @param socketTimeout  连接超时时间
+     * @param timeout        超时时间
+     * @param requestTimeout 请求超时时间
+     * @return RequestConfig
+     */
+    private static RequestConfig requestConfig(int socketTimeout, int timeout, int requestTimeout) {
         return RequestConfig.custom().setSocketTimeout(socketTimeout)
                 .setConnectTimeout(timeout).setConnectionRequestTimeout(requestTimeout).build();
     }
 
-    static HttpRequestBase setHeader(HttpRequestBase http, List<NameValuePair> header) {
+    /**
+     * 构造公共请求Header
+     *
+     * @param http   HttpRequestBase
+     * @param header List<NameValuePair>
+     * @return HttpRequestBase
+     */
+    private static void setHeader(HttpRequestBase http, List<NameValuePair> header) {
         if (header != null && !header.isEmpty()) {
-            for (NameValuePair n : header)
+            for (NameValuePair n : header) {
                 http.setHeader(n.getName(), n.getValue());
+            }
         }
-        return http;
     }
 
-    public static String doPost(String url, List<NameValuePair> param) throws IOException {
-        return doPost(url, param, null, socketTimeout, timeout, requestTimeout);
+    /**
+     * execute
+     *
+     * @param url      url
+     * @param mapParam param
+     * @param header   header
+     * @param method   method
+     * @return result
+     * @throws IOException IOException
+     */
+    public static String execute(String url, Map<String, String> mapParam, List<NameValuePair> header, HttpMethod method) throws IOException {
+        List<NameValuePair> param = new ArrayList<>();
+        if (mapParam != null) {
+            for (Map.Entry<String, String> entry : mapParam.entrySet()) {
+                param.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            }
+        }
+        return execute(url, param, header, method, SOCKET_TIMEOUT, TIMEOUT, REQUEST_TIMEOUT);
     }
 
-    public static String doPost(String url, List<NameValuePair> param, List<NameValuePair> header,
-                                int socketTimeout, int timeout, int requestTimeout) throws IOException {
+    /**
+     * execute
+     *
+     * @param url      url
+     * @param mapParam param
+     * @param method   method
+     * @return result
+     * @throws IOException IOException
+     */
+    public static String execute(String url, Map<String, String> mapParam, HttpMethod method) throws IOException {
+        List<NameValuePair> param = new ArrayList<>();
+        if (mapParam != null) {
+            for (Map.Entry<String, String> entry : mapParam.entrySet()) {
+                param.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            }
+        }
+        return execute(url, param, null, method, SOCKET_TIMEOUT, TIMEOUT, REQUEST_TIMEOUT);
+    }
+
+
+    /**
+     * execute
+     *
+     * @param url    url
+     * @param param  param
+     * @param method method
+     * @return result
+     * @throws IOException IOException
+     */
+    public static String execute(String url, List<NameValuePair> param, List<NameValuePair> header, HttpMethod method,
+                                 int socketTimeout, int timeout, int requestTimeout) throws IOException {
         String result = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(url);
-        httpPost = (HttpPost) setHeader(httpPost, header);
-        if (param != null && !param.isEmpty()) {
-            httpPost.setEntity(new UrlEncodedFormEntity(param, CHARSET));
+        HttpRequestBase requestBase = null;
+        if (method == HttpMethod.POST) {
+            HttpPost httpPost = new HttpPost(url);
+            if (param != null && !param.isEmpty()) {
+                httpPost.setEntity(new UrlEncodedFormEntity(param, CHARSET));
+            }
+            requestBase = httpPost;
+        } else if (method == HttpMethod.GET) {
+            if (param != null && !param.isEmpty()) {
+                url += url.indexOf("?") > 0 ? "&" : "?" + EntityUtils.toString(new UrlEncodedFormEntity(param, CHARSET));
+            }
+            requestBase = new HttpGet(url);
         }
-        httpPost.setConfig(requestConfig(socketTimeout, timeout, requestTimeout));
-        CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+        if (requestBase == null) {
+            return null;
+        }
+        setHeader(requestBase, header);
+        requestBase.setConfig(requestConfig(socketTimeout, timeout, requestTimeout));
+        CloseableHttpResponse httpResponse = httpClient.execute(requestBase);
         try {
             int code = httpResponse.getStatusLine().getStatusCode();
             if (code == HttpStatus.SC_OK) {
                 result = EntityUtils.toString(httpResponse.getEntity(), CHARSET);
+            } else {
+                logger.error("HttpFactory.execute statusCode:{}", code);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,42 +151,18 @@ public class HttpFactory {
         return result;
     }
 
-    public static String doGet(String url, List<NameValuePair> param, List<NameValuePair> header,
-                               int socketTimeout, int timeout, int requestTimeout) throws IOException {
-        String result = null;
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        if (param != null && !param.isEmpty()) {
-            url += url.indexOf("?") > 0 ? "&" : "?"
-                    + EntityUtils.toString(new UrlEncodedFormEntity(param, CHARSET));
-        }
-        HttpGet httpGet = new HttpGet(url);
-        httpGet = (HttpGet) setHeader(httpGet, header);
-        httpGet.setConfig(requestConfig(socketTimeout, timeout, requestTimeout));
-        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
-        try {
-            int code = httpResponse.getStatusLine().getStatusCode();
-            if (code == HttpStatus.SC_OK) {
-                result = EntityUtils.toString(httpResponse.getEntity(), CHARSET);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            httpResponse.close();
-            httpClient.close();
-        }
-        return result;
-    }
-
-    public static String doGet(String url, Map<String, String> param) {
-        List<NameValuePair> list = new ArrayList<>();
-        for (Map.Entry<String, String> entry : param.entrySet()) {
-            list.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-        }
-        try {
-            return doGet(url, list, null, socketTimeout, timeout, requestTimeout);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    /**
+     * HTTP Method Enum
+     * POST,GET
+     */
+    public enum HttpMethod {
+        /**
+         * POST请求
+         */
+        POST,
+        /**
+         * GET请求
+         */
+        GET
     }
 }
