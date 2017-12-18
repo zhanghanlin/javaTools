@@ -33,7 +33,7 @@ public class SingleThreadPool extends ThreadPool {
         SingleThreadPool pool = SingleThreadPool.getInstance();
         //模拟任务
         String task = "";
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < DEFAULT_RUN_COUNT; i++) {
             pool.runThreadPool(i + task);
         }
         if (!executor.isShutdown()) {

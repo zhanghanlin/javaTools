@@ -1,7 +1,11 @@
 package com.demo.java.concurrent;
 
+import java.util.Random;
+
 /**
  * 生产者
+ *
+ * @author zhanghanlin
  */
 public class Producer implements Runnable {
 
@@ -17,7 +21,7 @@ public class Producer implements Runnable {
     public void run() {
         try {
             while (true) {
-                Product p = new Product((int) (Math.random() * 10000));
+                Product p = new Product((new Random().nextInt() * 10000));
                 System.out.println(name + "准备生产:" + p.toString());
                 storage.push(p);
                 System.out.println(name + "已生产:" + p.toString());

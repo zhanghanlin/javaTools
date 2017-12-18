@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 仓库
+ * @author zhanghanlin
  */
 public class Storage {
 

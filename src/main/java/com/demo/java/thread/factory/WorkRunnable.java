@@ -2,6 +2,8 @@ package com.demo.java.thread.factory;
 
 /**
  * 定义一个测试目标
+ *
+ * @author zhanghanlin
  */
 public class WorkRunnable implements Runnable {
 

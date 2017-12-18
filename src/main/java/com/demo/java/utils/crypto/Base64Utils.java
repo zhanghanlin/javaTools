@@ -5,6 +5,8 @@ import org.apache.commons.codec.binary.Base64;
 
 /**
  * Base64加密工具类
+ *
+ * @author zhanghanlin
  */
 public class Base64Utils {
 

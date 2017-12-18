@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 /**
  * 正则工具类
+ *
+ * @author zhanghanlin
  */
 public class PatternUtils {
 

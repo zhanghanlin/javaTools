@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * MD5等加密
+ *
+ * @author zhanghanlin
  */
 public class DigestUtils {
 

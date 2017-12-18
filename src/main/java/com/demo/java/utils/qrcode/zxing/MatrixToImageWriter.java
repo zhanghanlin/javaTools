@@ -8,6 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * 二维码
+ *
+ * @author zhanghanlin
+ */
 public class MatrixToImageWriter {
     private static final int BLACK = 0xFF000000;
     private static final int WHITE = 0xFFFFFFFF;

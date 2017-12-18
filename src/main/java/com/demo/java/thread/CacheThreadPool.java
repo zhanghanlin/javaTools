@@ -7,6 +7,8 @@ import java.util.concurrent.Executors;
  * CacheThreadPool线程池实例
  * 创建corePoolSize为0，最大线程数为整型的最大数
  * 线程keepAliveTime为1分钟，缓存任务的队列为SynchronousQueue的线程池
+ *
+ * @author zhanghanlin
  */
 public class CacheThreadPool extends ThreadPool {
 
@@ -29,8 +31,8 @@ public class CacheThreadPool extends ThreadPool {
 
     public static void main(String[] args) {
         CacheThreadPool pool = CacheThreadPool.getInstance();
-        String task = "";//模拟任务
-        for (int i = 0; i < 15; i++) {
+        String task = "";
+        for (int i = 0; i < DEFAULT_RUN_COUNT; i++) {
             pool.runThreadPool(i + task);
         }
         if (!executor.isShutdown()) {

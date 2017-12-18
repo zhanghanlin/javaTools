@@ -12,6 +12,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+/**
+ * 图片压缩
+ *
+ * @author zhanghanlin
+ */
 public class ImageCompress {
 
     /**
@@ -50,7 +55,7 @@ public class ImageCompress {
         BufferedImage inputBufImage;
         try {
             inputBufImage = ImageIO.read(image);
-            ResampleOp resampleOp = new ResampleOp(w, h);// 转换
+            ResampleOp resampleOp = new ResampleOp(w, h);
             BufferedImage rescaledTomato = resampleOp.filter(inputBufImage, null);
             ImageIO.write(rescaledTomato, getFormatName(image), resizeImage);
         } catch (IOException e) {
@@ -112,7 +117,7 @@ public class ImageCompress {
      */
     static int[] getWH(File image) {
         int[] wh = new int[2];
-        Image img = null;      // 构造Image对象
+        Image img = null;
         try {
             img = ImageIO.read(image);
         } catch (IOException e) {

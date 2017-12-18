@@ -2,6 +2,8 @@ package com.demo.java.concurrent;
 
 /**
  * 消费者
+ *
+ * @author zhanghanlin
  */
 public class Consumer implements Runnable {
 

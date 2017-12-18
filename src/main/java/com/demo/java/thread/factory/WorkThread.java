@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 构建线程封装类WorkThread
  * 该类的功能主要是为了能够更好的管理线程而创建的
+ *
+ * @author zhanghanlin
  */
 public class WorkThread extends Thread {
 

@@ -15,6 +15,8 @@ import static com.demo.java.commons.Config.CHARSET;
 
 /**
  * velocity生成HTML
+ *
+ * @author zhanghanlin
  */
 public class VmUtils {
 
@@ -24,7 +26,8 @@ public class VmUtils {
         try {
             Properties p = new Properties();
             p.clear();
-            p.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, vmPath);//这是模板所在路径
+            //这是模板所在路径
+            p.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, vmPath);
             p.setProperty(VelocityEngine.INPUT_ENCODING, CHARSET);
             p.setProperty(VelocityEngine.OUTPUT_ENCODING, CHARSET);
             p.setProperty(VelocityEngine.RUNTIME_LOG_LOGSYSTEM_CLASS, "org.apache.velocity.runtime.log.NullLogSystem");

@@ -10,6 +10,8 @@ import static com.demo.java.commons.Config.MAX_THREAD_NUM;
  * ScheduledThreadPool线程池
  * 创建corePoolSize大小的线程池
  * 支持定时及周期性任务执行
+ *
+ * @author zhanghanlin
  */
 public class ScheduledThreadPool extends ThreadPool {
 
@@ -32,8 +34,8 @@ public class ScheduledThreadPool extends ThreadPool {
 
     public static void main(String[] args) {
         ScheduledThreadPool pool = ScheduledThreadPool.getInstance();
-        String task = "";//模拟任务
-        for (int i = 0; i < 15; i++) {
+        String task = "";
+        for (int i = 0; i < DEFAULT_RUN_COUNT; i++) {
             pool.runThreadPool(i + task);
         }
         if (!executor.isShutdown()) {

@@ -7,6 +7,8 @@ package com.demo.java.singleton;
  * 虽然导致类装载的原因有很多种，在单例模式中大多数都是调用getInstance方法
  * 但是也不能确定有其他的方式（或者其他的静态方法）导致类装载
  * 这时候初始化instance显然没有达到lazy loading的效果
+ *
+ * @author zhanghanlin
  */
 public class SingletonA {
 

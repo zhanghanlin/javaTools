@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Hex工具
+ *
+ * @author zhanghanlin
  */
 public class HexUtils {
 

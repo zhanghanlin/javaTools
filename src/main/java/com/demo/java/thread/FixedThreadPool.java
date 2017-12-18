@@ -9,6 +9,8 @@ import static com.demo.java.commons.Config.MAX_THREAD_NUM;
 /**
  * FixedThreadPool线程池
  * 创建固定大小(nThreads,大小不能超过int的最大值)的线程池
+ *
+ * @author zhanghanlin
  */
 public class FixedThreadPool extends ThreadPool {
 
@@ -31,8 +33,8 @@ public class FixedThreadPool extends ThreadPool {
 
     public static void main(String[] args) {
         FixedThreadPool pool = FixedThreadPool.getInstance();
-        String task = "";//模拟任务
-        for (int i = 0; i < 15; i++) {
+        String task = "";
+        for (int i = 0; i < DEFAULT_RUN_COUNT; i++) {
             pool.runThreadPool(i + task);
         }
         try {

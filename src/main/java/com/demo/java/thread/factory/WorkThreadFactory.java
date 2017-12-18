@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 实现线程工厂的方法
+ *
+ * @author zhanghanlin
  */
 public class WorkThreadFactory implements ThreadFactory {
 

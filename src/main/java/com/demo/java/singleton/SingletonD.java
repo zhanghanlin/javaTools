@@ -2,6 +2,8 @@ package com.demo.java.singleton;
 
 /**
  * 双重校验锁
+ *
+ * @author zhanghanlin
  */
 public class SingletonD {
 

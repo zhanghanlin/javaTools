@@ -2,6 +2,8 @@ package com.demo.java.concurrent;
 
 /**
  * 商品
+ *
+ * @author zhanghanlin
  */
 public class Product {
     private int id;

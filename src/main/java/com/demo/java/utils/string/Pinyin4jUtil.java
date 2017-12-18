@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * 汉字转拼音转换工具类
+ *
+ * @author zhanghanlin
  */
 public class Pinyin4jUtil {
 
@@ -150,7 +152,8 @@ public class Pinyin4jUtil {
      * @return
      */
     private static String parseTheChineseByObject(List<Map<String, Integer>> list) {
-        Map<String, Integer> first = null; // 用于统计每一次,集合组合数据
+        // 用于统计每一次,集合组合数据
+        Map<String, Integer> first = null;
         // 遍历每一组集合
         for (int i = 0; i < list.size(); i++) {
             // 每一组集合与上一次组合的Map

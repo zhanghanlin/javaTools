@@ -1,4 +1,8 @@
-package com.demo.java.thread.factory;
+package com.demo.java.factory;
+
+import com.demo.java.BaseTest;
+import com.demo.java.thread.factory.WorkRunnable;
+import com.demo.java.thread.factory.WorkThreadFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,9 +11,12 @@ import java.util.concurrent.TimeUnit;
 import static com.demo.java.commons.Config.MAX_THREAD_NUM;
 
 /**
- * 测试线程工厂
+ * 线程池测试
+ *
+ * @author zhanghanlin
  */
-public class TestThreadFactory {
+public class ThreadFactoryTest extends BaseTest {
+
     public static void main(String[] args) {
         //创建线程（并发）池，自动伸缩(自动条件线程池大小)
 //        ExecutorService executor = Executors.newCachedThreadPool(new WorkThreadFactory());

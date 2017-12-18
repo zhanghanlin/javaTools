@@ -16,8 +16,10 @@ import static com.demo.java.commons.Config.CHARSET;
 
 /**
  * 使用Google ZXing工具生成二维码
+ *
+ * @author zhanghanlin
  */
-public class ZXingUtil {
+public class ZxingUtil {
 
     static int width = 140;
     static int height = 140;
