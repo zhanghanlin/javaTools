@@ -8,21 +8,31 @@ import java.util.List;
  *
  * @author zhanghanlin
  */
-public class Container<T> {
+public class ContainerSync<T> {
 
     private final int capacity;
 
     private final List<T> list;
 
-    public Container(int capacity) {
+    public ContainerSync(int capacity) {
         this.capacity = capacity;
         list = new ArrayList<>(capacity);
     }
 
+    /**
+     * 容器列表
+     *
+     * @return list
+     */
     public List<T> getList() {
         return list;
     }
 
+    /**
+     * 最大容量
+     *
+     * @return capacity
+     */
     public int getCapacity() {
         return capacity;
     }
@@ -30,8 +40,8 @@ public class Container<T> {
     /**
      * 添加产品
      *
-     * @param t
-     * @return
+     * @param t T
+     * @return boolean
      */
     public synchronized boolean add(T t) {
         if (list.size() < capacity) {
@@ -44,7 +54,7 @@ public class Container<T> {
     /**
      * 判断是否已经存满
      *
-     * @return
+     * @return boolean
      */
     public synchronized boolean isFull() {
         return list.size() >= capacity;
@@ -53,7 +63,7 @@ public class Container<T> {
     /**
      * 判断是否为空
      *
-     * @return
+     * @return boolean
      */
     public synchronized boolean isEmpty() {
         return list.isEmpty();
@@ -62,7 +72,7 @@ public class Container<T> {
     /**
      * Get
      *
-     * @return
+     * @return T
      */
     public synchronized T get() {
         if (list.size() > 0) {
@@ -71,6 +81,11 @@ public class Container<T> {
         return null;
     }
 
+    /**
+     * 获取长度
+     *
+     * @return int
+     */
     public synchronized int getSize() {
         return list.size();
     }

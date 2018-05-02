@@ -5,6 +5,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 仓库
+ *
  * @author zhanghanlin
  */
 public class Storage {
@@ -14,7 +15,7 @@ public class Storage {
     /**
      * 生产
      *
-     * @param p
+     * @param p ProductSync
      */
     public void push(Product p) {
         queues.push(p);
@@ -22,12 +23,12 @@ public class Storage {
 
     /**
      * 消费
+     * 自动阻塞
      *
-     * @return
+     * @return ProductSync
      * @throws InterruptedException
      */
     public Product pop() throws InterruptedException {
-        // 消费产品，自动阻塞
         return queues.take();
     }
 }

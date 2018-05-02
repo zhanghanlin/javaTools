@@ -5,12 +5,12 @@ package com.demo.java.concurrent.sync;
  *
  * @author zhanghanlin
  */
-public class Consumer implements Runnable {
+public class ConsumerSync implements Runnable {
 
     /**
      * 简单的模拟，这里一个生产容器，设置成final类型的话不允许再次赋值
      */
-    private final Container<Product> container;
+    private final ContainerSync<ProductSync> containerSync;
 
     /**
      * 生产者监听器
@@ -22,26 +22,26 @@ public class Consumer implements Runnable {
      */
     private Object consumerMonitor;
 
-    public Consumer(Container<Product> container, Object producerMonitor, Object consumerMonitor) {
-        this.container = container;
+    public ConsumerSync(ContainerSync<ProductSync> containerSync, Object producerMonitor, Object consumerMonitor) {
+        this.containerSync = containerSync;
         this.producerMonitor = producerMonitor;
         this.consumerMonitor = consumerMonitor;
     }
 
     public void consume() {
         // 如果发现容器已经空了,消费者要停
-        if (container.isEmpty()) {
+        if (containerSync.isEmpty()) {
             // 唤醒生产者
             synchronized (producerMonitor) {
-                if (container.isEmpty()) {
+                if (containerSync.isEmpty()) {
                     producerMonitor.notify();
                 }
             }
             // 消费者挂起
             synchronized (consumerMonitor) {
-                if (container.isEmpty()) {
+                if (containerSync.isEmpty()) {
                     try {
-                        System.out.println("Consumer wait...");
+                        System.out.println("ConsumerSync wait...");
                         consumerMonitor.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -49,8 +49,8 @@ public class Consumer implements Runnable {
                 }
             }
         } else {
-            Product p = container.get();
-            System.out.println("get Product : " + p.toString());
+            ProductSync p = containerSync.get();
+            System.out.println("get ProductSync : " + p.toString());
         }
     }
 

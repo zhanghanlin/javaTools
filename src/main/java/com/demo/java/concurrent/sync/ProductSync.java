@@ -1,14 +1,14 @@
-package com.demo.java.concurrent;
+package com.demo.java.concurrent.sync;
 
 /**
  * 商品
  *
  * @author zhanghanlin
  */
-public class Product {
+public class ProductSync {
     private int id;
 
-    public Product(int id) {
+    public ProductSync(int id) {
         this.id = id;
     }
 

@@ -21,7 +21,7 @@ public class Producer implements Runnable {
     public void run() {
         try {
             while (true) {
-                Product p = new Product((new Random().nextInt() * 10000));
+                Product p = new Product(new Random().nextInt());
                 System.out.println(name + "准备生产:" + p.toString());
                 storage.push(p);
                 System.out.println(name + "已生产:" + p.toString());

@@ -1,16 +1,18 @@
 package com.demo.java.concurrent.sync;
 
+import java.util.Random;
+
 /**
  * 生产者
  *
  * @author zhanghanlin
  */
-public class Producer implements Runnable {
+public class ProducerSync implements Runnable {
 
     /**
      * 简单的模拟，这里一个生产容器，设置成final类型的话不允许再次赋值
      */
-    private final Container<Product> container;
+    private final ContainerSync<ProductSync> containerSync;
 
     /**
      * 生产者监听器
@@ -22,27 +24,27 @@ public class Producer implements Runnable {
      */
     private Object consumerMonitor;
 
-    public Producer(Container<Product> container, Object producerMonitor, Object consumerMonitor) {
-        this.container = container;
+    public ProducerSync(ContainerSync<ProductSync> containerSync, Object producerMonitor, Object consumerMonitor) {
+        this.containerSync = containerSync;
         this.producerMonitor = producerMonitor;
         this.consumerMonitor = consumerMonitor;
     }
 
     public void produce() {
-        Product p = new Product((int) Math.random() * 100);
+        ProductSync p = new ProductSync(new Random().nextInt());
         // 如果发现容器已经满了,生产者要停
-        if (container.isFull()) {
+        if (containerSync.isFull()) {
             // 唤醒消费者
             synchronized (consumerMonitor) {
-                if (container.isFull()) {
+                if (containerSync.isFull()) {
                     consumerMonitor.notify();
                 }
             }
             // 生产者挂起
             synchronized (producerMonitor) {
-                if (container.isFull()) {
+                if (containerSync.isFull()) {
                     try {
-                        System.out.println("Producer wait...");
+                        System.out.println("ProducerSync wait...");
                         producerMonitor.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -50,8 +52,8 @@ public class Producer implements Runnable {
                 }
             }
         } else {
-            boolean result = container.add(p);
-            System.out.println("add Product : " + result);
+            boolean result = containerSync.add(p);
+            System.out.println("add ProductSync : " + result);
         }
     }
 
