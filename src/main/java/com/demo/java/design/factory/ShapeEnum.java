@@ -6,5 +6,5 @@ package com.demo.java.design.factory;
  * @author zhanghanlin
  */
 public enum ShapeEnum {
-    A,B,C;
+    A, B, C
 }
