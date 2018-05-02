@@ -1,6 +1,9 @@
-package com.demo.java.design.observer;
+package com.demo.java.design;
 
 import com.demo.java.BaseTest;
+import com.demo.java.design.observer.ConcreteObserver;
+import com.demo.java.design.observer.ConcreteSubject;
+import com.demo.java.design.observer.Observer;
 
 /**
  * 观察者模式测试
