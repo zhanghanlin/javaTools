@@ -1,5 +1,9 @@
 package com.demo.java.thread;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
+import java.util.concurrent.ThreadFactory;
+
 /**
  * 线程池不允许使用Executors去创建，而是通过ThreadPoolExecutor的方式
  * 这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险
@@ -13,8 +17,11 @@ public class ThreadPool {
 
     static final int DEFAULT_RUN_COUNT = 15;
 
+    static ThreadFactory nameFactory = new ThreadFactoryBuilder().setNameFormat("t-p-%d").build();
+
     public void run(String task) {
-        System.out.println("run task :" + task);
+        Thread current = Thread.currentThread();
+        System.out.println(System.currentTimeMillis() / 1000 + "[" + current.getName() + "] - run task :" + task);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
