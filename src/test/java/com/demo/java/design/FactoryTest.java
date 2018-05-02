@@ -17,8 +17,8 @@ public class FactoryTest extends BaseTest {
         Shape a = factory.getShape(ShapeEnum.A);
         a.create();
         Shape b = factory.getShape(ShapeEnum.B);
-        a.create();
+        b.create();
         Shape c = factory.getShape(ShapeEnum.C);
-        a.create();
+        c.create();
     }
 }
