@@ -1,4 +1,4 @@
-package com.demo.java.singleton;
+package com.demo.java.design.singleton;
 
 /**
  * 静态内部类

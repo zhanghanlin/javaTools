@@ -1,4 +1,4 @@
-package com.demo.java.singleton;
+package com.demo.java.design.singleton;
 
 /**
  * 双重校验锁
