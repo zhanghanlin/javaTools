@@ -1,7 +1,6 @@
 package com.demo.java.thread;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * CacheThreadPool线程池实例
@@ -12,7 +11,8 @@ import java.util.concurrent.Executors;
  */
 public class CacheThreadPool extends ThreadPool {
 
-    static ExecutorService executor = Executors.newCachedThreadPool();
+    static ExecutorService executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+            60L, TimeUnit.SECONDS, new SynchronousQueue<>(), nameFactory);
 
     static CacheThreadPool cacheThreadPool = new CacheThreadPool();
 

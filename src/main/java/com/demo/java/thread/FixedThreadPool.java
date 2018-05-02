@@ -1,7 +1,8 @@
 package com.demo.java.thread;
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import static com.demo.java.commons.Config.MAX_THREAD_NUM;
@@ -14,7 +15,8 @@ import static com.demo.java.commons.Config.MAX_THREAD_NUM;
  */
 public class FixedThreadPool extends ThreadPool {
 
-    static ExecutorService executor = Executors.newFixedThreadPool(MAX_THREAD_NUM);
+    static ExecutorService executor = new ThreadPoolExecutor(MAX_THREAD_NUM, MAX_THREAD_NUM,
+            0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(), nameFactory);
 
     private static FixedThreadPool fixedThreadPool = new FixedThreadPool();
 
