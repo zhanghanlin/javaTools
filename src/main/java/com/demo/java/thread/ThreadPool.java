@@ -17,7 +17,7 @@ public class ThreadPool {
 
     static final int DEFAULT_RUN_COUNT = 15;
 
-    static ThreadFactory nameFactory = new ThreadFactoryBuilder().setNameFormat("t-p-%d").build();
+    public static ThreadFactory nameFactory = new ThreadFactoryBuilder().setNameFormat("t-p-%d").build();
 
     public void run(String task) {
         Thread current = Thread.currentThread();
