@@ -9,6 +9,6 @@ public class ShapeA implements Shape {
 
     @Override
     public void create() {
-        System.out.println("create demo shape A");
+        System.out.println("create shape A");
     }
 }

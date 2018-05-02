@@ -9,6 +9,6 @@ public class ShapeC implements Shape {
 
     @Override
     public void create() {
-        System.out.println("create demo shape C");
+        System.out.println("create shape C");
     }
 }

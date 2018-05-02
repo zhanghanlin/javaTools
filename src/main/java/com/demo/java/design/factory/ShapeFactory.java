@@ -5,7 +5,7 @@ package com.demo.java.design.factory;
  *
  * @author zhanghanlin
  */
-public class ShapeFactory {
+public class ShapeFactory extends AbstractFactory {
 
     /**
      * 获取模型
@@ -13,6 +13,7 @@ public class ShapeFactory {
      * @param shapeEnum ShapeEnum
      * @return Shape
      */
+    @Override
     public Shape getShape(ShapeEnum shapeEnum) {
         if (shapeEnum == null) {
             return null;
@@ -24,6 +25,11 @@ public class ShapeFactory {
         } else if (ShapeEnum.C.equals(shapeEnum)) {
             return new ShapeC();
         }
+        return null;
+    }
+
+    @Override
+    public Color getColor(ColorEnum colorEnum) {
         return null;
     }
 }
