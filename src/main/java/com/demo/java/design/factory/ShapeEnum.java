@@ -6,5 +6,8 @@ package com.demo.java.design.factory;
  * @author zhanghanlin
  */
 public enum ShapeEnum {
+    /**
+     * 模型
+     */
     A, B, C
 }

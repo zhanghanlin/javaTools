@@ -6,5 +6,8 @@ package com.demo.java.design.factory;
  * @author zhanghanlin
  */
 public enum ColorEnum {
+    /**
+     * 颜色
+     */
     RED, GREEN, BLUE
 }

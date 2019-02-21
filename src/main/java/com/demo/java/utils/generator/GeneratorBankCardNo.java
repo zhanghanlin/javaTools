@@ -21,7 +21,8 @@ public class GeneratorBankCardNo {
      */
     public synchronized static String getBrankNumber(String prefix) {
         if (StringUtils.isNotBlank(prefix)) {
-            if ("689".contains(prefix) && prefix.length() == 1) {
+            String types = "689";
+            if (types.contains(prefix) && prefix.length() == 1) {
                 String st = "666" + prefix + getUnixTime();
                 return st + getBankCardCheckCode(st);
             } else {
@@ -57,7 +58,8 @@ public class GeneratorBankCardNo {
      */
     public static boolean checkBankCard(String cardId) {
         char bit = getBankCardCheckCode(cardId.substring(0, cardId.length() - 1));
-        if (bit == 'N') {
+        char errorBit = 'N';
+        if (bit == errorBit) {
             return false;
         }
         return cardId.charAt(cardId.length() - 1) == bit;

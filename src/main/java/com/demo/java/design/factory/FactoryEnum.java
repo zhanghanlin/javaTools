@@ -6,5 +6,8 @@ package com.demo.java.design.factory;
  * @author zhanghanlin
  */
 public enum FactoryEnum {
+    /**
+     * 工厂
+     */
     SHAPE, COLOR
 }
